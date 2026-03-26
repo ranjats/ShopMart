@@ -1,0 +1,9 @@
+node_modules
+.env
+auth_info_baileys
+auth_info_baileys_*
+client/node_modules
+client/dist
+.DS_Store
+*.log
+firebase-applet-config.json

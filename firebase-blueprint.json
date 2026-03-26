@@ -1,0 +1,43 @@
+{
+  "entities": {
+    "Order": {
+      "title": "Order",
+      "description": "A customer order from WhatsApp",
+      "type": "object",
+      "properties": {
+        "order_id": { "type": "string", "description": "Unique order identifier" },
+        "customer_phone": { "type": "string", "description": "Customer WhatsApp JID" },
+        "customer_name": { "type": "string", "description": "Customer push name" },
+        "items": { "type": "string", "description": "List of items ordered" },
+        "status": { "type": "string", "enum": ["pending", "preparing", "ready", "completed"] },
+        "bill_amount": { "type": "number", "description": "Total bill amount" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["order_id", "customer_phone", "customer_name", "items", "status", "bill_amount", "created_at", "updated_at"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "An inventory item",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Product name" },
+        "price": { "type": "number", "description": "Product price" },
+        "in_stock": { "type": "number", "description": "1 if in stock, 0 if out of stock" },
+        "quantity": { "type": "number", "description": "Available quantity" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "price", "in_stock", "quantity", "created_at"]
+    }
+  },
+  "firestore": {
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Stores all customer orders"
+    },
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Stores all inventory products"
+    }
+  }
+}
